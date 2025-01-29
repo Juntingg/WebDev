@@ -1,6 +1,6 @@
 
-const { getDate } = require("./modules/utils");
-const { GREETING } = require("./lang/messages/en/user");
+const { getDate } = require("./COMP4537/labs/3/modules/utils");
+const { GREETING } = require("./COMP4537/labs/3/lang/messages/en/user");
 const url = require("url");
 const querystring = require("querystring");
 
