@@ -24,7 +24,8 @@ http.createServer(async (request, response) => {
         const currentTime = getDate();
 
         response.writeHead(200, { 'Content-type': 'text/html' });
-        response.end(GREETING.replace("%1", name) + currentTime);
+        const message = GREETING.replace("%1", name) + currentTime
+        response.end(`<p style="color: blue;">${message}</p>`);
 
     } else if (pathname === `/${BASE_PATH}/writeFile/`) {
         const text = urlQueryParams.text || "";
