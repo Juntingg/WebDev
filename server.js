@@ -62,7 +62,7 @@ http.createServer(async (request, response) => {
 
     } else {
         response.writeHead(404, { "Content-Type": "text/html" });
-        response.end(PAGE_NOT_FOUND);
+        response.end(`${PAGE_NOT_FOUND}: ${FILE_NAME} does not exist`);
 
     }
 
