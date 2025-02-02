@@ -1,6 +1,7 @@
 
 const { getDate } = require("./COMP4537/labs/3/modules/utils");
-const { writeFile, readFile } = require("./COMP4537/labs/3/modules/filesManager");
+// const { writeFile, readFile } = require("./COMP4537/labs/3/modules/filesManager");
+const FilesManager = require("./COMP4537/labs/3/modules/filesManager");
 const { GREETING, PAGE_NOT_FOUND, BAD_REQUEST_FOR_EMPTY_TEXT } = require("./COMP4537/labs/3/lang/messages/en/user");
 const url = require("url");
 const querystring = require("querystring");
@@ -24,7 +25,8 @@ http.createServer(async (request, response) => {
         const currentTime = getDate();
 
         response.writeHead(200, { 'Content-type': 'text/html' });
-        response.end(GREETING.replace("%1", name) + currentTime);
+        const message = GREETING.replace("%1", name) + currentTime
+        response.end(`<p style="color: blue;">${message}</p>`);
 
     } else if (pathname === `/${BASE_PATH}/writeFile/`) {
         const text = urlQueryParams.text || "";
@@ -35,7 +37,7 @@ http.createServer(async (request, response) => {
             return;
         }
 
-        await writeFile(`${BASE_PATH}/${FILE_NAME}`, text);
+        await FilesManager.writeFile(`${BASE_PATH}/${FILE_NAME}`, text);
         response.end(`"${text}" have been written into the file`);
 
     } else if (pathname === `/${BASE_PATH}/readFile/${FILE_NAME}`) {
@@ -47,7 +49,7 @@ http.createServer(async (request, response) => {
         // }
         let content;
         try {
-            content = await readFile(`${BASE_PATH}/${FILE_NAME}`);
+            content = await FilesManager.readFile(`${BASE_PATH}/${FILE_NAME}`);
             if (content === "") {
                 content = PAGE_NOT_FOUND;
             }
