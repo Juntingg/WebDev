@@ -10,8 +10,8 @@ const BASE_PATH = "COMP4537/labs/3"
 const FILE_NAME = "file.txt"
 
 'use strict';
-var http = require('http');
-var fs = require('fs');
+const http = require('http');
+const fs = require('fs');
 
 http.createServer(async (request, response) => {
 
@@ -41,12 +41,7 @@ http.createServer(async (request, response) => {
         response.end(`"${text}" have been written into the file`);
 
     } else if (pathname === `/${BASE_PATH}/readFile/${FILE_NAME}`) {
-        // const text = urlQueryParams.text || "";
-        // if (text.trim() === "") {
-        //     response.writeHead(404, { "Content-Type": "text/html" });
-        //     response.end(BAD_REQUEST_FOR_EMPTY_TEXT);
-        //     return;
-        // }
+
         let content;
         try {
             content = await FilesManager.readFile(`${BASE_PATH}/${FILE_NAME}`);
